@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers\Frontend;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Product;
+use App\Category;
+use App\Brand;
+class CategoriesController extends Controller
+{
+    
+    public function index(){
+
+    }
+    public function show($id){
+    	$category = Category::find($id);
+    	if(!is_null($category)){
+    		return view('frontend.pages.categories.show', compact('category'));
+    	}
+    	else{
+    		session()->flash('errors', 'No product found');
+    		return redirect('/');
+    	}
+    }
+}
