@@ -12,14 +12,15 @@ class DistrictController extends Controller
     // Manage All Division Page
     public function index()
     {
-        $districts = District::orderBy('priority', 'asc')->get();
+        $districts = District::orderBy('id', 'asc')->get();
         return view ('Backend.pages.districts.manage', compact('districts'));
     }
 
     // Add New Division Page
     public function create()
     {
-        return view('backend.pages.districts.createdistricts');
+        $divisions = Division::orderBy('id', 'asc')->get();
+        return view('backend.pages.districts.createdistricts', compact('divisions'));
     }
 
 
@@ -29,16 +30,16 @@ class DistrictController extends Controller
         // Validate The Form Data
         $request->validate([
             'name'              => 'required|max:255',
-            'priority'       	=> 'required|max:100',
+            'division_id'       	=> 'required|max:100',
         ],
         [
             'name.required'         => 'Please Provide Districts Name',
-            'priority.required'  	=> 'Please Provide Priority Number to Display on the Dashboard', 
+            'division_id.required'  	=> 'Please Provide Priority Number to Display on the Dashboard', 
         ]);
 
         $district = new District();
         $district->name = $request->name;
-        $district->priority = $request->priority;
+        $district->division_id = $request->division_id;
 		$district->save();
 
         session()->flash('success', 'A New District Has Been Added Successfully');
@@ -51,8 +52,9 @@ class DistrictController extends Controller
     public function edit_brand($id)
     {
         $district = District::find($id);
+        $divisions = Division::orderBy('id', 'asc')->get();
         if ( !is_null($district) ){
-            return view('Backend.pages.districts.editdistricts', compact('district'));
+            return view('Backend.pages.districts.editdistricts', compact('district', 'divisions'));
         }else{
             return route('admin.districts');
         }
@@ -64,16 +66,16 @@ class DistrictController extends Controller
         // Validate The Form Data
         $request->validate([
             'name'              => 'required|max:255',
-            'priority'       	=> 'required|max:100',
+            'division_id'       	=> 'required|max:100',
         ],
         [
             'name.required'         => 'Please Provide District Name',
-            'priority.required'  => 'Please Provide Priority Number to Display on the Dashboard',
+            'division_id.required'  => 'Please Provide Priority Number to Display on the Dashboard',
         ]);
 
         $district = District::find($id);
         $district->name = $request->name;
-        $district->priority = $request->priority;
+        $district->division_id = $request->division_id;
         $district->save();
 
         session()->flash('success', 'A New District Has Been Added Successfully');

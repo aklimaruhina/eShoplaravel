@@ -28,26 +28,26 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addToCart(Request $request)
-    {
-        $product = Product::findOrFail($request->input('product_id'));
-        $cart = session()->has('cart') ? session()->get('cart') : [];
-        if (array_key_exists($product->id, $cart)) {
-            $cart[$product->id]['quantity']++;
-        } else {
-            $cart[$product->id] = [
-                'title' => $product->title,
-                'quantity' => 1,
-                'unit_price' => $product->sale_price,
-            ];
-        }
-        session(['cart' => $cart]);
-        session()->flash('message', $product->title.' added to cart.');
+    // public function addToCart(Request $request)
+    // {
+    //     $product = Product::findOrFail($request->input('product_id'));
+    //     $cart = session()->has('cart') ? session()->get('cart') : [];
+    //     if (array_key_exists($product->id, $cart)) {
+    //         $cart[$product->id]['quantity']++;
+    //     } else {
+    //         $cart[$product->id] = [
+    //             'title' => $product->title,
+    //             'quantity' => 1,
+    //             'unit_price' => $product->sale_price,
+    //         ];
+    //     }
+    //     session(['cart' => $cart]);
+    //     session()->flash('message', $product->title.' added to cart.');
 
-        $data = [];
-        $data['cart'] = session()->has('cart') ? session()->get('cart') : [];
-        return response()->json($data);
-    }
+    //     $data = [];
+    //     $data['cart'] = session()->has('cart') ? session()->get('cart') : [];
+    //     return response()->json($data);
+    // }
     public function cart_page(){
         return view('frontend.pages.cart-page');
     }
@@ -59,7 +59,7 @@ class CartController extends Controller
             'value' => '5%',
             'order' => 1 // the order of calculation of cart base conditions. The bigger the later to be applied.
         ));
-        $product = Product::find($request->product_id);
+        $product = Product::findOrFail($request->product_id);
         // $user = Auth::user();
         // $userId = $user->id;
         $image = ProductImage::where('product_id', $request->product_id)->first();

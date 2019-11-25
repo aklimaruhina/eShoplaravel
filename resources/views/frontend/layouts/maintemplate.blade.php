@@ -14,8 +14,10 @@
 
         <!-- All Page Body Content -->
         @yield('bodycontent')
+
     
       <!-- Footer -->
       @include('frontend.includes.footer')
+      @yield('script')
     </body>
 </html>

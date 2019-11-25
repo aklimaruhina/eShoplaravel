@@ -37,7 +37,7 @@
 								<tr>
 							      <th scope="row">{{ $i }}</th>
 							      <td>{{ $district->name }}</td>
-							      <td>{{ $district->priority }}</td>
+							      <td>{{ $district->division->name }}</td>
 							      
 							      
 							      <td>

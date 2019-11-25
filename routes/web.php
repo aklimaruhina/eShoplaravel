@@ -13,6 +13,10 @@
 
 Route::get('/', 'Frontend\PagesController@index')->name('index');
 
+Route::get('/ajaxdivision/{id}', function($id){
+	$district = App\District::where('division_id', $id)->get();
+	return Response::json($district);
+});
 Route::group(['prefix' => 'products'], function(){
 	Route::get('/', 'Frontend\ProductController@products')->name('products');
 	Route::get('/{slug}', 'Frontend\ProductController@show')->name('show_product');

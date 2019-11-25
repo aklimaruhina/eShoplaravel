@@ -28,8 +28,15 @@
 	                		</div>
 
 	                		<div class="form-group">
-	                			<label for="description">Priority Number in List</label>
-	                			<input type="text" name="priority" class="form-control" placeholder="Priority Number for the Display List">
+	                			<label for="division">Select Division</label>
+	                			<select class="form-control" name="division_id">
+
+	                				<option value="-1">Please Select a Division</option>
+	                				@foreach($divisions as $division)
+	                				<option value="{{ $division->id}}">{{ $division->name}}</option>
+	                				@endforeach
+	                			</select>
+
 	                		</div>
 
 	                		<div class="form-group">

@@ -117,7 +117,7 @@
                         <div class="form-group row">
                             <label for="division_id" class="col-md-4 col-form-label text-md-right">{{ __('Division') }}</label>
 
-                            <select class="form-control" name="division_id">
+                            <select class="form-control" name="division_id" id="division_id">
                                 <option>Please Select Your Division</option>
                                 @foreach ( $divisions as $division )
                                     <option value="{{ $division->id }}">{{ $division->name }}</option>
@@ -129,11 +129,9 @@
                         <div class="form-group row">
                             <label for="division_id" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
 
-                            <select class="form-control" name="district_id">
+                            <select class="form-control" name="district_id" id="district_id">
                                 <option>Please Select Your District</option>
-                                @foreach ( $districts as $district )
-                                    <option value="{{ $district->id }}">{{ $district->name }}</option>
-                                @endforeach
+                               
                             </select>
                         </div>
 
@@ -151,4 +149,22 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#division_id').change(function(){
+        var division_id = $(this).val();
+        $.get('/ajaxdivision/'+division_id, function(data){
+            $('#district_id').empty().prepend('<option>Please select your district</option');
+            $.each(data, function(index, disobj){
+                var $option = $("<option selected></option>").val(disobj.id).text(disobj.name);
+                $('#district_id').append($option).trigger('change');
+            })
+        })
+       
+    });
+    // $('#division_id').trigger('change');
+});
+</script>
 @endsection
