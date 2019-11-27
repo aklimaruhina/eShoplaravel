@@ -34,6 +34,7 @@ Route::group(['prefix' => 'carts'], function(){
 	Route::post('/cart-clear', 'CartController@clear')->name('carts.clear');
 	Route::post('/update/{id}', 'CartController@update')->name('carts.update');
 	Route::post('/delete/{id}', 'CartController@destroy')->name('carts.delete');
+	Route::post('/cart-updateqty', 'CartController@update_qty')->name('carts.qty');
 });
 
 //Checkout Routes 

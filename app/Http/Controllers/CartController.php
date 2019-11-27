@@ -78,7 +78,8 @@ class CartController extends Controller
             'conditions' => $total_condition
         ));
         Cart::condition($total_condition);
-        return back()->with('success',"$product->title has successfully beed added to the shopping cart!");
+        echo json_encode(['status' => 'success', 'message' => 'Item add to cart', 'totalItems' => Cart::getTotalQuantity()]);
+        // return back()->with('success',"$product->title has successfully beed added to the shopping cart!");
     }
 
     /**
@@ -87,6 +88,18 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function update_qty(Request $request){
+        $product = Product::findOrFail($request->product_id);
+        $qty = $request->qty;
+        Cart::update($product->id, array(
+            'quantity' => array(
+              'relative' => false,
+              'value' => $qty
+            ), 
+        ));
+
+        echo json_encode(['total' => Cart::getTotal(), 'cart_total'=> Cart::getTotalQuantity(), 'subtotal' => Cart::getSubTotal()]);
+    }
     public function store(Request $request)
     {
         $this->validate($request,[

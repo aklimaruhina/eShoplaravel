@@ -107,7 +107,7 @@
               <!-- <button type="button" class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span class="cart-title">Shopping Cart</span><br> -->
               <!-- {{ App\Cart::totalItems() }} item(s) - $0.00</span> </button> -->
               <button type="button" class="btn btn-inverse btn-block btn-lg dropdown-toggle cart-dropdown-button"> <span id="cart-total"><span class="cart-title">Shopping Cart</span><br> 
-              {{Cart::getTotalQuantity()}} item(s) - ${{ Cart::getSubTotal() }}</span> </button>
+              <span class="cart_total">{{Cart::getTotalQuantity()}} </span> item(s) - $<span class="subtotal">{{ Cart::getSubTotal() }}</span></span> </button>
               <ul class="dropdown-menu pull-right cart-dropdown-menu">
                 <li>
                   <table class="table table-striped">
@@ -150,7 +150,8 @@
                         </tr>
                       </tbody>
                     </table>
-                    <p class="text-right"> <span class="btn-viewcart"><a href="{{ route('carts.index')}}"><strong><i class="fa fa-shopping-cart"></i> View Cart</strong></a></span> 
+                    <p class="text-right"> <span class="btn-viewcart">
+                      <a href="{{ route('carts.cartpage')}}"><strong><i class="fa fa-shopping-cart"></i> View Cart</strong></a></span> 
                       <span class="btn-checkout"><a href="{{ route('checkouts.index')}}"><strong><i class="fa fa-share"></i> Checkout</strong></a></span> </p>
                   </div>
                 </li>

@@ -24,5 +24,20 @@
 <script src="{{ asset('js/common.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/global.js') }}" type="text/javascript"></script>
 <script src="{{ asset('owl-carousel/owl.carousel.min.js') }}" type="text/javascript"></script>
-
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/css/bootstrap-notify.min.css" >
+  <script src="https://shareurcodes.com/js/bootstrap-notify.min.js" ></script>
+<style type="text/css">
+.float-alert {   display: inline-block;   margin: 0px auto;   position: fixed;  -webkit-transition: all 0.5s ease-in-out;  transition: all 0.5s ease-in-out;  z-index: 1031;   top: 20px;  right: 20px;}
+.alert:not(.float-alert) span[data-notify="icon"] {  float: left;   font-size: 18px;  margin-top: 0px;}
+.float-alert.alert span[data-notify="icon"] {  font-size: 20px;  display: block;  left: 13px;  position: absolute;   top: 50%;   margin-top: -11px;}
+.alert.float-alert .alert-title {  margin-left: 30px;   font-weight: 500;}
+[dir="rtl"] .alert.float-alert .alert-title {   float: left;}
+.alert:not(.float-alert) .alert-title {  margin-left: 10px;}
+.alert.float-alert button.close {  position: absolute;  right: 10px;  top: 50%;  margin-top: -13px;
+    z-index: 1033;  background-color: #FFFFFF;  display: block;  border-radius: 50%;   opacity: .4;  line-height: 11px;  width: 25px;  height: 25px;
+    outline: 0 !important;  text-align: center;  padding: 3px;   font-weight: 400;
+}
+.alert.float-alert button.close:hover {   opacity: .55;}
+.alert.float-alert .close~span {   display: block;   max-width: 89%;}
+</style>
 @include('frontend.allinfo.messages')

@@ -126,9 +126,8 @@
 
 	            <div class="button-group">
 	              <button type="button" class="wishlist" data-toggle="tooltip" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                <!-- @include('frontend.pages.products.partials.cart_button') -->
+                @include('frontend.pages.products.partials.cart_button')
                 <!-- <button type="submit" class="addtocart-btn">Add to Cart</button> -->
-                <a class="addtocart-btn" id="AddItemToCart" href="javascript:void(0);" tabindex="5"> Add Item To Cart</a>
 	              <button type="button" class="compare" data-toggle="tooltip" title="Compare this Product"><i class="fa fa-exchange"></i></button>
 	            </div>
 
@@ -153,27 +152,6 @@
 
 @endsection
 @section('script')
-<script>
-  $(document).ready(function(){
 
-
-    function btnAddCart(param) {
-  var product_id = param;
-  var url = "{{ route('cart.add') }}";
-  $.ajax({
-    type: "POST",
-    url: url,
-    data: { product_id: product_id },
-    success: function (data) {
-      console.log(data);
-
-    },
-    error: function (data) {
-      console.log('Error:', data);
-    }
-  });
-};
-  })
-</script>
 @endsection
 

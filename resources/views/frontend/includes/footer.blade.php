@@ -107,7 +107,7 @@
         <script>
             $('.parallax').parally({offset: -40});
         </script>
-        <script>
+      <script>
         $(document).ready(function(){
           $.ajaxSetup({
               headers: {
@@ -130,4 +130,28 @@
             })
           });
         });
-        </script>
+        function addToCart(id){
+          $.ajax({
+            type: "POST",
+            url: "/carts/cart-add",
+            data: {"_token": "{{ csrf_token() }}", "product_id": id},
+            dataType: 'json',
+            success: function(data){
+              console.log(data.message);
+              alert_float('success', data.message);
+              $('.cart_total').html(data.totalItems);
+            }
+          })
+        }
+        function alert_float(type, message, timeout) {
+            var aId, el;
+            aId = $("body").find('float-alert').length;
+            aId++;
+            aId = 'alert_float_' + aId; 
+            el = $('<div id="' + aId + '" class="float-alert animated fadeInRight col-xs-11 col-sm-4 alert alert-' + type + '"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="fa fa-bell-o" data-notify="icon"></span><span class="alert-title">' + message + '</span></div>');
+            $("body").append(el);
+            setTimeout(function() {
+                $('#' + aId).hide('fast', function() { $('#' + aId).remove(); });
+            }, timeout ? timeout : 3500);
+        }
+  </script>

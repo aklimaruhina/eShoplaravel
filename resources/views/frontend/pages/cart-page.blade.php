@@ -44,9 +44,8 @@
                   <td class="text-left"><a href="">{{$product->name }}</a></td>
                   <td class="text-left">product 11</td>
                   <td class="text-left"><div style="max-width: 200px;" class="input-group btn-block">
-                      <input type="text" class="form-control quantity" size="1" value="{{ $product->quantity}}" name="quantity">
+                      <input type="text" class="form-control quantity" size="1" data-id ="{{ $product->id}}" value="{{ $product->quantity}}" name="quantity">
                       <span class="input-group-btn">
-                      <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit" data-original-title="Update"><i class="fa fa-refresh"></i></button>
                       <button  class="btn btn-danger" title="" data-toggle="tooltip" type="button" data-original-title="Remove"><i class="fa fa-times-circle"></i></button>
                       </span></div></td>
                   <td class="text-right">Taka. {{ $product->price}}</td>
@@ -121,15 +120,15 @@
                 </tr>
                 <tr>
                   <td class="text-right"><strong>Total:</strong></td>
-                  <td class="text-right">Taka. {{ Cart::getTotal() }}</td>
+                  <td class="text-right">Taka. <span class="total_vl">{{ Cart::getTotal() }}</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
         <div class="buttons">
-          <div class="pull-left"><a class="btn btn-default" href="index.html">Continue Shopping</a></div>
-          <div class="pull-right"><a class="btn btn-primary" href="checkout.html">Checkout</a></div>
+          <div class="pull-left"><a class="btn btn-default" href="{{ route('products')}}">Continue Shopping</a></div>
+          <div class="pull-right"><a class="btn btn-primary" href="{{ route('checkouts.index')}}">Checkout</a></div>
         </div>
       </div>
     </div>
@@ -138,4 +137,25 @@
 
 
 
+  @endsection
+  @section('script')
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.quantity').on('change', function(){
+      var qty = $(this).val();
+      var product_id = $(this).data('id');
+      $.ajax({
+            type: "POST",
+            url: "/carts/cart-updateqty",
+            data: {"_token": "{{ csrf_token() }}", "product_id": product_id, "qty": qty},
+            dataType: 'json',
+            success: function(data){
+              $('.total_vl').html(data.total);
+              $('.totalItems').html(data.totalItems);
+              $('.subtotal').html(data.subtotal);
+            }
+          });
+    })
+  })
+  </script>  
   @endsection
