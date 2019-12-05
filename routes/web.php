@@ -51,8 +51,8 @@ Route::group(['prefix' => 'user'], function(){
 });
 
 
-
-Route::prefix('admin')->group(function () {
+Route::group(['middleware' => ['auth:web','Admin'], 'prefix' => 'admin'], function () {
+// Route::prefix('admin')->group(function () {
 	Route::get('/', 'Backend\PagesController@index')->name('admin.index');
     Route::group(['prefix' => '/product'], function(){
 	    Route::get('/createproduct', 'Backend\ProductsController@createproduct')->name('createproduct');
